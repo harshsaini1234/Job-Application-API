@@ -24,4 +24,14 @@ public class Job_Service_Implement implements Job_Service {
         jobs.add(job);
 
     }
+
+    @Override
+    public Job findJobById(Long id) {
+        for (Job job : jobs){
+            if (job.getId().equals(id)){
+                return job;
+            }
+        }
+        return null;
+    }
 }
