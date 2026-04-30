@@ -23,7 +23,8 @@ public class Job_Controller {
     @PostMapping("/jobs")
     public ResponseEntity<String> createJob( @RequestBody Job job){
         jobService.createJob(job);
-        return new ResponseEntity<>(" Job added successfully",HttpStatus.CREATED);
+        return new ResponseEntity<>(" Job added successfully",HttpStatus.CREATED
+                );
     }
 
     @GetMapping("/jobs/{id}")
@@ -33,6 +34,16 @@ public class Job_Controller {
             return new ResponseEntity<>(job, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @DeleteMapping("/jobs/{id}")
+    public ResponseEntity<String> deleteJob(@PathVariable Long id){
+       boolean deleted = jobService.deleteJobById(id);
+       if (deleted)
+           return new ResponseEntity<>("Job successfully Deleted",HttpStatus.OK);
+       else
+           return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
     }
     /*
     Get/jobs : Get All jobs
