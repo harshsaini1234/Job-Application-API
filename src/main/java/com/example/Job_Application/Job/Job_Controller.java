@@ -18,6 +18,7 @@ public class Job_Controller {
 
     @GetMapping
     public ResponseEntity<List<Job>> findAll(){
+
         return ResponseEntity.ok(jobService.findAll());
     }
 
