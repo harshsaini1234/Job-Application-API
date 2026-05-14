@@ -8,5 +8,10 @@ public interface companyService {
 
     List<Company> getAllCompanies();
 
-//    boolean updatedCompany(Company company, Long id);
+
+    boolean updateCompany(Company company , Long id);
+    void createCompany(Company company);
+    boolean deleteCompanyById(Long id);
+
+
 }

@@ -16,15 +16,37 @@ public class companyController {
     }
 
     @GetMapping
-    public List<Company> getAllCompanies(){
-        return companyservice.getAllCompanies();
+    public ResponseEntity<List<Company>> getAllCompanies(){
+        return new ResponseEntity<>(companyservice.getAllCompanies(),HttpStatus.OK);
     }
 
-//    @PutMapping
-//    public ResponseEntity<String> updateCompany(@PathVariable Long id ,
-//                                                @RequestBody Company company){
-//        companyService.updatedCompany(company, id);
-//        return new ResponseEntity<>("Company updated successfully", HttpStatus.OK);
-//
-//    }
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updateCompany(@PathVariable Long id,
+                                                @RequestBody Company company)
+    {
+        companyservice.updateCompany(company,id);
+        return new ResponseEntity<>("Company updated successfully ",HttpStatus.OK);
+    }
+
+    @PostMapping()
+    public ResponseEntity<String> addCompany(@RequestBody Company company)
+    {
+        companyservice.createCompany(company);
+        return new ResponseEntity<>("Company successfully added",HttpStatus.OK);
+    }
+
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteCompany(@PathVariable Long id){
+        boolean isDeleted = companyservice.deleteCompanyById(id);
+        if (isDeleted) {
+            return new ResponseEntity<>("company deleted successfully ", HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<>("company not fund",HttpStatus.NOT_FOUND);
+        }
+
+    }
+
+
 }
