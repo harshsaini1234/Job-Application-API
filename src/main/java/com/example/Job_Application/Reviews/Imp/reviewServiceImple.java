@@ -41,4 +41,13 @@ public class reviewServiceImple  implements ReviewService {
         }
 
     }
+
+    @Override
+    public Review getReview(Long companyId, Long reviewId) {
+        List<Review> reviews = reviewRepository.findByCompanyId(companyId);
+        return reviews.stream().filter(review -> review.getId().equals(reviewId))
+                .findFirst()
+                .orElse(null);
+
+    }
 }
