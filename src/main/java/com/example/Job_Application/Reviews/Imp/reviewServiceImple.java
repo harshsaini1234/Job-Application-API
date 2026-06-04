@@ -71,6 +71,7 @@ public class reviewServiceImple  implements ReviewService {
             Review review = reviewRepository.findById(reviewId).orElse(null);
             Company company = review.getCompany();
             company.getReviews().remove(review);
+            review.setCompany(null);
             compService.updateCompany(company,companyId);
             reviewRepository.deleteById(reviewId);
             return true;
